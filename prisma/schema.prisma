@@ -13,27 +13,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model topic {
+model Topic {
   id     String   @id @default(auto()) @map("_id") @db.ObjectId
   name   String   @unique
-  words  word[]
+  words  Word[]
+
+  @@map("topic")
 }
 
-model word {
+model Word {
   id              String          @id @default(auto()) @map("_id") @db.ObjectId
   word            String          @unique
-  topic           topic           @relation(fields: [topicId], references: [id])
+  topic           Topic           @relation(fields: [topicId], references: [id])
   topicId         String          @db.ObjectId
-  leaderboards    leaderboard[]   @relation(fields: [leaderboardIDs], references: [id])
+  leaderboards    Leaderboard[]   @relation(fields: [leaderboardIDs], references: [id])
   leaderboardIDs  String[]        @db.ObjectId
+
+  @@map("word")
 }
 
-model leaderboard {
+model Leaderboard {
   id                          String    @id @default(auto()) @map("_id") @db.ObjectId
   playerName                  String
-  correctWords                word[]    @relation(fields: [correctWordIDs], references: [id])
+  correctWords                Word[]    @relation(fields: [correctWordIDs], references: [id])
   correctWordIDs              String[]  @db.ObjectId
   incorrectGuessesPerWord     Int[]
   startDatetime               DateTime
   endDatetime                 DateTime
+
+  @@map("leaderboard")
 }
