@@ -15,8 +15,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return a successful message', () => {
+      expect(appController.itWorks()).toBe('<h1>Hangman API</h1><p>If you see this page, that means the server is running successfully!</p>');
     });
   });
 });
