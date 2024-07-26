@@ -17,7 +17,7 @@ export class LeaderboardController {
   }
 
   @Get('search')
-  searchResultHistory(@Query('playerName') playerName: string, @Query('startDateRange') startDateRange: string, @Query('endDateRange') endDateRange: string) {
+  searchResultHistory(@Query('playerName') playerName?: string, @Query('startDateRange') startDateRange?: string, @Query('endDateRange') endDateRange?: string) {
     return this.leaderboardService.searchResultHistory(playerName, startDateRange, endDateRange);
   }
 }
